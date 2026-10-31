@@ -8,7 +8,7 @@ public class GeoContoller : MonoBehaviour
     public int max = 2;
     // Start is called before the first frame update
     private Rigidbody2D rb2d;
-
+    private SpriteRenderer _spriteRenderer;
 
     //refrence the Sprite in Game
     SpriteRenderer sprite;
@@ -17,6 +17,7 @@ public class GeoContoller : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         //Debug.Log(Var2 + "World");
         //Var2 = "Goodbye";
         //Debug.Log(Var2 + "World");
@@ -38,19 +39,25 @@ public class GeoContoller : MonoBehaviour
             sprite.color = Color.blue;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (xInput > 0) { _spriteRenderer.flipX = true; }
+        else if (xInput < 0)
         {
-            //Change the 'color' property of the "Sprtie Renderer" to "red"
-            sprite.color = Color.red;
+            _spriteRenderer.flipX = false;
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                //Change the 'color' property of the "Sprtie Renderer" to "red"
+                sprite.color = Color.red;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                //Change the 'color' property of the "Sprtie Renderer" to "green"
+                sprite.color = Color.green;
+            }
+
+
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            //Change the 'color' property of the "Sprtie Renderer" to "green"
-            sprite.color = Color.green;
-        }
-
-
     }
     public string nextlevel = "Level 2";
     private void OnTriggerEnter2D(Collider2D collision)
